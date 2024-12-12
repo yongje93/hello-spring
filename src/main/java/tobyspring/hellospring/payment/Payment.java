@@ -1,4 +1,4 @@
-package tobyspring.hellospring;
+package tobyspring.hellospring.payment;
 
 import lombok.Getter;
 import lombok.ToString;

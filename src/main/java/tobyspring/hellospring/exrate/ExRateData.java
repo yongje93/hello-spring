@@ -1,6 +1,7 @@
-package tobyspring.hellospring;
+package tobyspring.hellospring.exrate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.math.BigDecimal;
 import java.util.Map;
 

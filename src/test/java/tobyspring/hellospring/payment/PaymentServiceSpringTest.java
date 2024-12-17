@@ -2,7 +2,6 @@ package tobyspring.hellospring.payment;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -28,7 +27,7 @@ class PaymentServiceSpringTest {
     ExRateProviderStub exRateProviderStub;
 
     @Test
-    void convertedAmount() throws Exception {
+    void convertedAmount() {
         // exRate: 1000
         Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
 
@@ -44,7 +43,7 @@ class PaymentServiceSpringTest {
     }
 
     @Test
-    void validUntil() throws IOException {
+    void validUntil() {
         Payment payment = paymentService.prepare(1L, "USD", BigDecimal.TEN);
 
         // valid until prepare() 30분 뒤로 설정?

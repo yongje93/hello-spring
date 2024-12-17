@@ -8,7 +8,32 @@ import java.net.URISyntaxException;
 
 public class ApiTemplate {
 
-    public BigDecimal getExRate(String url, ApiExecutor apiExecutor, ExRateExtractor extractor) {
+    private final ApiExecutor apiExecutor;
+    private final ExRateExtractor exRateExtractor;
+
+    public ApiTemplate() {
+        this.apiExecutor = new HttpClientApiExecutor();
+        this.exRateExtractor = new ErApiExRateExtractor();
+    }
+
+    public ApiTemplate(ApiExecutor apiExecutor, ExRateExtractor exRateExtractor) {
+        this.apiExecutor = apiExecutor;
+        this.exRateExtractor = exRateExtractor;
+    }
+
+    public BigDecimal getForExRate(String url) {
+        return this.getForExRate(url, this.apiExecutor, this.exRateExtractor);
+    }
+
+    public BigDecimal getForExRate(String url, ApiExecutor apiExecutor) {
+        return this.getForExRate(url, apiExecutor, this.exRateExtractor);
+    }
+
+    public BigDecimal getForExRate(String url, ExRateExtractor extractor) {
+        return this.getForExRate(url, this.apiExecutor, extractor);
+    }
+
+    public BigDecimal getForExRate(String url, ApiExecutor apiExecutor, ExRateExtractor extractor) {
         URI uri;
         try {
             uri = new URI(url);

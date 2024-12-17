@@ -2,14 +2,11 @@ package tobyspring.hellospring.exrate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.stream.Collectors;
+import tobyspring.hellospring.api.SimpleApiExecutor;
 import tobyspring.hellospring.payment.ExRateProvider;
 
 public class WebApiExRateProvider implements ExRateProvider {
@@ -31,7 +28,7 @@ public class WebApiExRateProvider implements ExRateProvider {
 
         String response;
         try {
-            response = executeApi(uri);
+            response = new SimpleApiExecutor().execute(uri);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -41,15 +38,6 @@ public class WebApiExRateProvider implements ExRateProvider {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private String executeApi(URI uri) throws IOException {
-        String response;
-        HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-            response = reader.lines().collect(Collectors.joining());
-        }
-        return response;
     }
 
     private BigDecimal extractExRate(String response) throws JsonProcessingException {

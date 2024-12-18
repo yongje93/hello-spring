@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
-import tobyspring.hellospring.data.OrderRepository;
 
 @Service
 public class OrderService {
